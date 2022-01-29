@@ -1,6 +1,24 @@
 # RECEBIMENTO-MTR
 Desenvolvido para receber de forma simples o Manifesto de transporte de resíduos, e gerar uma planilha com seus dados.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Bibliotecas
 from ast import Break
 from operator import index
