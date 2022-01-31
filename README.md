@@ -2,7 +2,7 @@
 Desenvolvido para receber de forma simples o Manifesto de transporte de resíduos, e gerar uma planilha com seus dados.
 
 
-#Bibliotecas
+<b>Bibliotecas</b>
         
         from ast import Break
         from operator import index
@@ -11,7 +11,7 @@ Desenvolvido para receber de forma simples o Manifesto de transporte de resíduo
         from tkinter import Button
         from playwright.sync_api import sync_playwright
 
-#Leitura de planilha com dados
+<b>Leitura de planilha com dados</b>
 
         arquivo = "PASTA"
         bd = pd.read_excel(arquivo)
@@ -19,7 +19,7 @@ Desenvolvido para receber de forma simples o Manifesto de transporte de resíduo
         linha = 0
 
 
-#Login
+<b>Login</b>
         with sync_playwright() as p :
             browser = p.chromium.launch(headless=False)
             page = browser.new_page()
@@ -37,14 +37,14 @@ Desenvolvido para receber de forma simples o Manifesto de transporte de resíduo
             page.wait_for_timeout(1000)
             page.click("[id='btEntrar']")
 
-#Navegação até meus mtr
+<b>Navegação até meus mtr</b>
 
             page.wait_for_timeout(1000)
             page.click('#dv_principal_menu > ul > li:nth-child(2) > a')
             page.wait_for_timeout(1000)
             page.click('#dv_principal_menu > ul > li:nth-child(2) > ul > li:nth-child(5) > a')
 
-#Preenchimento de dados
+<b>Preenchimento de dados</b>
 
             while True:
                 if linha == linha_final: #Final do loop
