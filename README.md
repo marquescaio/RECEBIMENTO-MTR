@@ -2,7 +2,8 @@
 Desenvolvido para receber de forma simples o Manifesto de transporte de resíduos, e gerar uma planilha com seus dados.
 
 
-        #Bibliotecas
+#Bibliotecas
+        
         from ast import Break
         from operator import index
         from sqlite3 import Row
@@ -10,17 +11,19 @@ Desenvolvido para receber de forma simples o Manifesto de transporte de resíduo
         from tkinter import Button
         from playwright.sync_api import sync_playwright
 
+#Leitura de planilha com dados
+
         arquivo = "PASTA"
         bd = pd.read_excel(arquivo)
         linha_final = len(bd) - 1
         linha = 0
 
 
+#Login
         with sync_playwright() as p :
             browser = p.chromium.launch(headless=False)
             page = browser.new_page()
 
-            #Login
             page.goto("http://200.20.53.11/")
             page.fill("input[name='txtCnpj']",'CNPJ')
             page.wait_for_timeout(1000)
@@ -34,11 +37,14 @@ Desenvolvido para receber de forma simples o Manifesto de transporte de resíduo
             page.wait_for_timeout(1000)
             page.click("[id='btEntrar']")
 
-            #Navegação até meus mtr
+#Navegação até meus mtr
+
             page.wait_for_timeout(1000)
             page.click('#dv_principal_menu > ul > li:nth-child(2) > a')
             page.wait_for_timeout(1000)
             page.click('#dv_principal_menu > ul > li:nth-child(2) > ul > li:nth-child(5) > a')
+
+#Preenchimento de dados
 
             while True:
                 if linha == linha_final: #Final do loop
@@ -104,7 +110,7 @@ Desenvolvido para receber de forma simples o Manifesto de transporte de resíduo
                             # mtr_erro = page.get_attribute('input[id="txtCodigoMtr"]', 'value') se codigo ficar lento, deixar apenas para esse e remover "status"
                             bd.at[linha, 'STATUS'] = "RECU"
                             bd.at[linha, 'QNT-I'] = QNTi
-                            page.locator('text=Recebimento do MTRclose >> button[role="button"]').click() #se tiver mais de um button/input procurar no terminal o respectivo apos o erro
+                            page.locator('text=Recebimento do MTRclose >> button[role="button"]').click() 
 
                         #Preencher restante dos campos
                         page.wait_for_timeout(1000)
